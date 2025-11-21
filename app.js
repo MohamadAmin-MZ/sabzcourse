@@ -15,4 +15,4 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use("/v1/auth" , authRouter)
 
-multer.express = app;
+module.exports = app;
