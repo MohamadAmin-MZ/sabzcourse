@@ -1,7 +1,9 @@
 const userModel = require("../../models/user")
 const registerValodator = require("../../validators/register")
+const banUserModel = require("../../models/ban-user")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+
 
 
 const register = async (req, res) => {
@@ -12,6 +14,13 @@ const register = async (req, res) => {
     }
 
     const { username, name, email, password, phone } = req.body
+
+    const isBanUser = await banUserModel.findOne({ phone: phone })
+    console.log(isBanUser);
+    
+    if (isBanUser) {
+        return res.status(409).json({ message: "username is ban." })
+    }
 
     const isUserExists = await userModel.findOne({ $or: [{ username }, { email }] })
 

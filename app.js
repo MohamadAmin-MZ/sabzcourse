@@ -1,9 +1,9 @@
 const express = require("express")
-const multer = require("multer")
 const path = require("path")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const authRouter = require("./routers/v1/auth")
+const ususersRouter = require("./routers/v1/users")
 
 const app = express()
 
@@ -14,5 +14,5 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use("/v1/auth" , authRouter)
-
+app.use("/v1/users", ususersRouter);
 module.exports = app;
