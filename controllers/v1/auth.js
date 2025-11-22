@@ -40,7 +40,7 @@ const register = async (req, res) => {
         email,
         password: userPasswordHash,
         phone,
-        role: countOfUser > 0 ? "User" : "Admin"
+        role: countOfUser > 0 ? "USER" : "ADMIN"
     })
 
     const accessUserJwt = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "30 day" })
