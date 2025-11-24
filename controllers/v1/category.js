@@ -36,10 +36,17 @@ const create = async (req, res) => {
     }
 }
 
+const getAll = async (req, res) => {
+
+    const gategories = await categoriesModel.find()
+
+    return res.json(gategories)
+}
 
 
 
 
 module.exports = {
     create,
+    getAll
 }
