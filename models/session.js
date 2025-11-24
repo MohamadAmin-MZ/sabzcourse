@@ -22,6 +22,6 @@ const sessionSchema = mongoose.Schema({
     { timestamps: true }
 )
 
-const sessionModel = mongoose.model("sessions", sessionSchema)
+const sessionModel = mongoose.model("Sessions", sessionSchema)
 
 module.exports = { sessionModel }
