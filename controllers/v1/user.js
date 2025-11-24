@@ -1,6 +1,9 @@
 const userModel = require("../../models/user");
 const banUserModel = require("../../models/ban-user");
+const registerValodator = require("../../validators/register")
+const bcrypt = require("bcrypt")
 const { isValidObjectId } = require("mongoose");
+const { request } = require("express");
 
 const getAll = async (req, res) => {
     const users = await userModel.find().select("-password")
@@ -65,7 +68,36 @@ const changeRole = async (req, res) => {
     }
 };
 
+const editUser = async (req, res) => {
+
+    const validationResult = registerValodator(req.body)
+
+    if (validationResult !== true) {
+        return res.status(422).json(validationResult)
+    }
+
+    const { username, name, email, password, phone } = req.body
+
+    const passwordHash = await bcrypt.hash(password, 12)
+
+    const editUser = await userModel.findOneAndUpdate(
+        {
+            _id: req.user._id
+        },
+        {
+            username,
+            name,
+            email,
+            password: passwordHash,
+            phone
+        },
+        {
+            returnDocument: "after"
+        }
+    ).select("-password").lean()
+
+    return res.json(editUser)
+}
 
 
-
-module.exports = { banUser, getAll, deletUser, changeRole }
+module.exports = { banUser, getAll, deletUser, changeRole, editUser }
