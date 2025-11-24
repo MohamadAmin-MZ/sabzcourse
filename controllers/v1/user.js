@@ -30,11 +30,42 @@ const deletUser = async (req, res) => {
     const deleteUser = await userModel.findByIdAndDelete({ _id: req.params.id });
 
     if (!deleteUser) {
-    return res.status(404).json({message: "user not found.",});
-  }
+        return res.status(404).json({ message: "user not found.", });
+    }
 
     res.status(200).json("User delete successfully.")
 
 }
 
-module.exports = { banUser, getAll, deletUser }
+const changeRole = async (req, res) => {
+    const { id } = req.body;
+    const isValidUserID = isValidObjectId(id);
+
+    if (!isValidUserID) {
+        return res.status(409).json({
+            message: "User ID is not valid !!",
+        });
+    }
+
+    const user = await userModel.findOne({ _id: id });
+
+    let newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+        { _id: id },
+        {
+            role: newRole,
+        }
+    );
+
+    if (updatedUser) {
+        return res.json({
+            message: "User role changed successfully :))",
+        });
+    }
+};
+
+
+
+
+module.exports = { banUser, getAll, deletUser, changeRole }
