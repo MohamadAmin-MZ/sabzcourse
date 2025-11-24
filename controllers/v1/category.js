@@ -101,10 +101,28 @@ const updata = async (req, res) => {
 
 }
 
+const remove = async (req, res) => {
+    const { id } = req.params;
+  const isValidID = mongoose.Types.ObjectId.isValid(id);
+
+  if (!isValidID) {
+    return res.status(409).json({
+      message: "Category ID is not valid !!",
+    });
+  }
+
+  const deletedCategory = await categoriesModel.findOneAndDelete({
+    _id: id
+  });
+
+  return res.json(deletedCategory);
+}
+
 
 
 module.exports = {
     create,
     getAll,
-    updata
+    updata,
+    remove
 }
