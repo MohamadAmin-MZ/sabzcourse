@@ -43,10 +43,68 @@ const getAll = async (req, res) => {
     return res.json(gategories)
 }
 
+const updata = async (req, res) => {
+
+    try {
+        const { title, href } = req.body;
+
+        if (!title || !href) {
+            return res.status(400).json({
+                message: "Both title and href are required"
+            });
+        }
+
+        if (typeof title !== "string" || typeof href !== "string") {
+            return res.status(400).json({
+                message: "title and href must be strings"
+            });
+        }
+
+        if (title.trim().length < 2) {
+            return res.status(400).json({
+                message: "title must be at least 2 characters long"
+            });
+        }
+
+        const isValidID = mongoose.Types.ObjectId.isValid(req.params.id);
+
+        if (!isValidID) {
+            return res.status(409).json({
+                message: "Category ID is not valid !!",
+            });
+        }
+
+        const updatedCategory = await categoriesModel.findOneAndUpdate(
+            {
+                _id: req.params.id,
+            },
+            {
+                title,
+                href,
+            },
+            {
+                returnDocument: "after"
+            }
+        );
+
+        if (!updatedCategory) {
+            return res.status(404).json({
+                message: "Category not found !!",
+            });
+        }
+
+        return res.json(updatedCategory);
+    } catch (error) {
+        console.error("Error in update category:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+
+}
 
 
 
 module.exports = {
     create,
-    getAll
+    getAll,
+    updata
 }

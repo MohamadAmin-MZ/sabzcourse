@@ -7,5 +7,6 @@ const router = express.Router()
 
 router.post("/create", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, categoriesController.create)
 router.get("/getAll", authMiddlewares.havingToken, categoriesController.getAll)
+router.put("/updata/:id", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, categoriesController.updata)
 
 module.exports = router;
