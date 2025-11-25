@@ -3,7 +3,7 @@ const multer = require("multer")
 
 const uploader = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "..", "courses", "covers"))
+        cb(null, path.join(__dirname, "..", "public", "courses", "covers"))
     },
     filename: (req, file, cb) => {
         const fileName = Date.now() + String(Math.random() * 9999)
@@ -13,4 +13,4 @@ const uploader = multer.diskStorage({
     }
 })
 
-module.exports = { uploader }
+module.exports = uploader 
