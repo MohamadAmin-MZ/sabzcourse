@@ -27,7 +27,7 @@ const create = async (req, res) => {
 
     const mainCourse = await courseModel
         .findById(course._id)
-        .populate("creat", "-password");
+        .populate("creator", "-password");
 
 
     res.status(201).json(mainCourse)
