@@ -1,6 +1,7 @@
 const courseModel = require("../../models/course")
+const sessionModel = require("../../models/session")
 
-const create = async (req, res) => {
+const createCourse = async (req, res) => {
     const {
         name,
         description,
@@ -31,14 +32,26 @@ const create = async (req, res) => {
 
 
     res.status(201).json(mainCourse)
+}
+
+const createSession = async (req, res) => {
+    const { title, time, free} = req.body
+
+    const session = await sessionModel.create({
+        title,
+        time,
+        course: req.params.id,
+        free,
+        video: req.file.filename
+    })
 
 
+    return res.status(201).json(session)
 
 }
 
 
-
-
 module.exports = {
-    create
+    createCourse,
+    createSession
 }

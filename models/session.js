@@ -2,15 +2,19 @@ const mongoose = require("mongoose")
 
 const sessionSchema = mongoose.Schema({
     title: {
-        Type: String,
+        type: String,
         required: true
     },
     time: {
-        Type: String,
+        type: String,
         required: true
     },
     free: {
-        Type: Number, // 0 => not free & 1 => free
+        type: Number, // 0 => not free & 1 => free
+        required: true
+    },
+    video:{
+        type: String,
         required: true
     },
     course: {
@@ -24,4 +28,4 @@ const sessionSchema = mongoose.Schema({
 
 const sessionModel = mongoose.model("Sessions", sessionSchema)
 
-module.exports = { sessionModel }
+module.exports = sessionModel
