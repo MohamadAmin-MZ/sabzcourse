@@ -19,6 +19,9 @@ router.post("/:id/session",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.createSession
- )
+)
+
+router.get("/getAll", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, courseController.getAllSessions)
+
 
 module.exports = router

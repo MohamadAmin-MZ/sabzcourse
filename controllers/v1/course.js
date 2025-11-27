@@ -51,7 +51,19 @@ const createSession = async (req, res) => {
 }
 
 
+const getAllSessions = async (req, res) => {
+  const sessions = await sessionModel
+    .find({})
+    .populate("course", "name")
+    .lean();
+
+  return res.json(sessions);
+};
+
+
+
 module.exports = {
     addCourse,
-    createSession
+    createSession,
+    getAllSessions
 }
