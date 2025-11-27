@@ -72,12 +72,10 @@ const getSession = async (req, res) => {
     }
 
     const course = await courseModel.findOne({ href: req.params.href })
-    console.log(course);
 
     const sesiion = await sessionModel.findOne({ _id: req.params.sessionId })
 
     const sessions = await sessionModel.find({ course: course._id })
-    console.log(sessions);
 
     return res.status(200).json({ sesiion, sessions })
 
