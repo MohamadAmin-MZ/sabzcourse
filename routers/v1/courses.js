@@ -14,7 +14,7 @@ router.post(
     courseController.addCourse
 )
 
-router.post("/:id/session",
+router.post("/:id/create/session",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("video"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
