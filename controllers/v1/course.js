@@ -82,7 +82,15 @@ const getSession = async (req, res) => {
 }
 
 
+const removeSession = async (req , res) => {
+    const deleteSession =  await sessionModel.findOneAndDelete({_id : req.params.id})
 
+    if (!deleteSession) {
+        return res.status(404).json({massage: "Session not found"})
+    }
+
+    return res.json(deleteSession)
+}
 
 
 
@@ -92,5 +100,6 @@ module.exports = {
     addCourse,
     createSession,
     getAllSessions,
-    getSession
+    getSession,
+    removeSession
 }

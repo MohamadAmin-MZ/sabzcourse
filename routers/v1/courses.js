@@ -29,5 +29,11 @@ router.get("/getAll",
 
 router.get("/:href/:sessionId", courseController.getSession)
 
+router.delete("/session/:id",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.removeSession
+)
+
 
 module.exports = router
