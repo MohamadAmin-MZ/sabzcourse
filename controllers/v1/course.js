@@ -1,5 +1,6 @@
 const courseModel = require("../../models/course")
 const sessionModel = require("../../models/session")
+const {isValidObjectId} = require("mongoose")
 
 const addCourse = async (req, res) => {
     const {
@@ -61,18 +62,33 @@ const getAllSessions = async (req, res) => {
     return res.json(sessions);
 };
 
+
 const getSession = async (req, res) => {
-    const course = await courseModel.findOne({href : req.params.href})
+
+    const isVlidUserID = isValidObjectId(req.params.sessionId)
+
+    if (!isVlidUserID) {
+        return res.status(409).json({ message: "User ID is not valid !!" })
+    }
+
+    const course = await courseModel.findOne({ href: req.params.href })
     console.log(course);
-    
-    const sesiion = await sessionModel.findOne({_id : req.params.sessionId})
 
-    const sessions = await sessionModel.find({course : course._id })
+    const sesiion = await sessionModel.findOne({ _id: req.params.sessionId })
+
+    const sessions = await sessionModel.find({ course: course._id })
     console.log(sessions);
-    
-    return res.status(200).json({sesiion, sessions})
 
- }
+    return res.status(200).json({ sesiion, sessions })
+
+}
+
+
+
+
+
+
+
 
 module.exports = {
     addCourse,
