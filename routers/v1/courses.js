@@ -11,14 +11,14 @@ router.post(
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("cover"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
-    courseController.createCourse
+    courseController.addCourse
 )
 
 router.post("/:id/session",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("video"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
-    courseController.createSessions
+    courseController.createSession
  )
 
 module.exports = router

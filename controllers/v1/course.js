@@ -1,7 +1,7 @@
 const courseModel = require("../../models/course")
 const sessionModel = require("../../models/session")
 
-const createCourse = async (req, res) => {
+const addCourse = async (req, res) => {
     const {
         name,
         description,
@@ -52,6 +52,6 @@ const createSession = async (req, res) => {
 
 
 module.exports = {
-    createCourse,
+    addCourse,
     createSession
 }
