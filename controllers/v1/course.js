@@ -34,8 +34,9 @@ const addCourse = async (req, res) => {
     res.status(201).json(mainCourse)
 }
 
+
 const createSession = async (req, res) => {
-    const { title, time, free} = req.body
+    const { title, time, free } = req.body
 
     const session = await sessionModel.create({
         title,
@@ -52,18 +53,30 @@ const createSession = async (req, res) => {
 
 
 const getAllSessions = async (req, res) => {
-  const sessions = await sessionModel
-    .find({})
-    .populate("course", "name")
-    .lean();
+    const sessions = await sessionModel
+        .find({})
+        .populate("course", "name")
+        .lean();
 
-  return res.json(sessions);
+    return res.json(sessions);
 };
 
+const getSession = async (req, res) => {
+    const course = await courseModel.findOne({href : req.params.href})
+    console.log(course);
+    
+    const sesiion = await sessionModel.findOne({_id : req.params.sessionId})
 
+    const sessions = await sessionModel.find({course : course._id })
+    console.log(sessions);
+    
+    return res.status(200).json({sesiion, sessions})
+
+ }
 
 module.exports = {
     addCourse,
     createSession,
-    getAllSessions
+    getAllSessions,
+    getSession
 }

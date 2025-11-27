@@ -21,7 +21,13 @@ router.post("/:id/session",
     courseController.createSession
 )
 
-router.get("/getAll", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, courseController.getAllSessions)
+router.get("/getAll",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.getAllSessions
+)
+
+router.get("/:href/:sessionId", courseController.getSession)
 
 
 module.exports = router
