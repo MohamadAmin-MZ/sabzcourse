@@ -27,7 +27,9 @@ router.get("/getAll",
     courseController.getAllSessions
 )
 
-router.get("/:href/:sessionId", courseController.getSession)
+router.get("/:href/:sessionId",
+    courseController.getSession
+)
 
 router.delete("/session/:id",
     authMiddlewares.havingToken,

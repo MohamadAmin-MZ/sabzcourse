@@ -6,6 +6,7 @@ const authRouter = require("./routers/v1/auth")
 const ususersRouter = require("./routers/v1/users")
 const categoriesRouter = require("./routers/v1/categories")
 const coursesRouter = require("./routers/v1/courses")
+const commentRouter = require("./routers/v1/comments")
 
 const app = express()
 
@@ -19,4 +20,5 @@ app.use("/v1/auth" , authRouter)
 app.use("/v1/users", ususersRouter)
 app.use("/v1/categories", categoriesRouter)
 app.use("/v1/courses", coursesRouter)
+app.use("/v1/comment", commentRouter)
 module.exports = app;
