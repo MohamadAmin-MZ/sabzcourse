@@ -10,6 +10,10 @@ const courseUserSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Course",
         required: true
+    },
+    price:{
+        type: Number,
+        required: true
     }
 }, { timestamps: true })
 

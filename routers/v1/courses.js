@@ -37,5 +37,7 @@ router.delete("/session/:id",
     courseController.removeSession
 )
 
+router.post("/:id/register", authMiddlewares.havingToken, courseController.register)
+
 
 module.exports = router

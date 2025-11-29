@@ -1,6 +1,7 @@
 const courseModel = require("../../models/course")
 const sessionModel = require("../../models/session")
-const {isValidObjectId} = require("mongoose")
+const { isValidObjectId } = require("mongoose")
+const courseUserModel = require("../../models/course-user")
 
 const addCourse = async (req, res) => {
     const {
@@ -82,17 +83,36 @@ const getSession = async (req, res) => {
 }
 
 
-const removeSession = async (req , res) => {
-    const deleteSession =  await sessionModel.findOneAndDelete({_id : req.params.id})
+const removeSession = async (req, res) => {
+    const deleteSession = await sessionModel.findOneAndDelete({ _id: req.params.id })
 
     if (!deleteSession) {
-        return res.status(404).json({massage: "Session not found"})
+        return res.status(404).json({ massage: "Session not found" })
     }
 
     return res.json(deleteSession)
 }
 
+const register = async (req, res) => {
+    const price = req.body.price
 
+    const isUserAlredyRegistered = await courseUserModel.findOne({
+        user: req.user._id,
+        course: req.params.id
+    })
+
+    if (isUserAlredyRegistered) {
+        return res.status(409).json({massage: "user already register in this course."})
+    }
+
+    const register = await courseUserModel.create({
+        user: req.user._id,
+        course: req.params.id,
+        price
+    })
+
+    return res.status(201).json({massage: "you are registered successfully."})
+}
 
 
 
@@ -101,5 +121,6 @@ module.exports = {
     createSession,
     getAllSessions,
     getSession,
-    removeSession
+    removeSession,
+    register
 }
