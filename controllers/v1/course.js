@@ -2,6 +2,7 @@ const courseModel = require("../../models/course")
 const sessionModel = require("../../models/session")
 const { isValidObjectId } = require("mongoose")
 const courseUserModel = require("../../models/course-user")
+const categoryModel = require("../../models/category")
 
 const addCourse = async (req, res) => {
     const {
@@ -114,6 +115,21 @@ const register = async (req, res) => {
     return res.status(201).json({massage: "you are registered successfully."})
 }
 
+const getCoursesByCategory = async (req, res) => {
+  const { href } = req.params;
+  const category = await categoryModel.findOne({ href });
+
+  if (category) {
+    const categoryCourses = await courseModel.find({
+      categoryID: category._id,
+    });
+
+    res.json(categoryCourses);
+  } else {
+    res.josn([]);
+  }
+}
+
 
 
 module.exports = {
@@ -122,5 +138,6 @@ module.exports = {
     getAllSessions,
     getSession,
     removeSession,
-    register
+    register,
+    getCoursesByCategory
 }

@@ -27,6 +27,12 @@ router.get("/getAll",
     courseController.getAllSessions
 )
 
+router.get("/category/:href",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.getCoursesByCategory    
+);
+
 router.get("/:href/:sessionId",
     courseController.getSession
 )
@@ -38,6 +44,9 @@ router.delete("/session/:id",
 )
 
 router.post("/:id/register", authMiddlewares.havingToken, courseController.register)
+
+
+
 
 
 module.exports = router
