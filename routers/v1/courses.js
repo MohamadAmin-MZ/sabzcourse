@@ -29,7 +29,6 @@ router.get("/getAll",
 
 router.get("/category/:href",
     authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
     courseController.getCoursesByCategory    
 );
 
