@@ -159,6 +159,27 @@ const remove = async (req, res) => {
     return res.status(404).json({ massage: "The course was not found." })
 }
 
+const getRelated = async (req, res) => {
+    const { href } = req.params;
+
+    const course = await courseModel.findOne({ href });
+
+    if (!course) {
+        return res.status(404).json({
+            messgae: "Course not found !!",
+        });
+    }
+
+    let relatedCourses = await courseModel.find({
+        categoryID: course.categoryID,
+    });
+
+    relatedCourses = relatedCourses.filter((course) => course.href !== href);
+
+    return res.json(relatedCourses);
+};
+
+
 
 module.exports = {
     addCourse,
@@ -169,5 +190,6 @@ module.exports = {
     register,
     getCoursesByCategory,
     getOne,
-    remove
+    remove,
+    getRelated
 }

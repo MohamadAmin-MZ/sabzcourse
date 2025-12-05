@@ -54,6 +54,11 @@ router.get("/:href", authMiddlewares.havingToken,
 router.delete("/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
-    courseController.remove)
+    courseController.remove
+)
+
+router.get("/related/:href",
+    courseController.getRelated
+);
 
 module.exports = router
