@@ -11,6 +11,6 @@ const categoriesSchema = mongoose.Schema({
     }
 })
 
-const categoriesModel = mongoose.model("Categories", categoriesSchema)
+const categoriesModel = mongoose.model("Category", categoriesSchema)
 
 module.exports = categoriesModel

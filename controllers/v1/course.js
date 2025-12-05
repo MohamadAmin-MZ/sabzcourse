@@ -3,6 +3,7 @@ const sessionModel = require("../../models/session")
 const { isValidObjectId } = require("mongoose")
 const courseUserModel = require("../../models/course-user")
 const categoryModel = require("../../models/category")
+const commentModel = require("../../models/comment")
 
 const addCourse = async (req, res) => {
     const {
@@ -103,7 +104,7 @@ const register = async (req, res) => {
     })
 
     if (isUserAlredyRegistered) {
-        return res.status(409).json({massage: "user already register in this course."})
+        return res.status(409).json({ massage: "user already register in this course." })
     }
 
     const register = await courseUserModel.create({
@@ -112,24 +113,39 @@ const register = async (req, res) => {
         price
     })
 
-    return res.status(201).json({massage: "you are registered successfully."})
+    return res.status(201).json({ massage: "you are registered successfully." })
 }
 
 const getCoursesByCategory = async (req, res) => {
-  const { href } = req.params;
-  const category = await categoryModel.findOne({ href });
+    const { href } = req.params;
+    const category = await categoryModel.findOne({ href });
 
-  if (category) {
-    const categoryCourses = await courseModel.find({
-      categoryID: category._id,
-    });
+    if (category) {
+        const categoryCourses = await courseModel.find({
+            categoryID: category._id,
+        });
 
-    res.json(categoryCourses);
-  } else {
-    res.josn([]);
-  }
+        res.json(categoryCourses);
+    } else {
+        res.josn([]);
+    }
 }
 
+const getOne = async (req, res) => {
+    const course = await courseModel
+        .findOne({ href: req.params.href })
+        .populate("creator", "-password")
+        .populate("Category")
+
+    const session = await sessionModel.find({ course: course._id }).lean()
+    const comment = await commentModel.find({course : course._id}).populate("creator", "-password").lean()
+    const countUserRegister = await courseUserModel.countDocuments({course: course._id})
+
+
+    console.log(comment);
+    
+    return res.json({course, session, comment, countUserRegister})
+}
 
 
 module.exports = {
@@ -139,5 +155,6 @@ module.exports = {
     getSession,
     removeSession,
     register,
-    getCoursesByCategory
+    getCoursesByCategory,
+    getOne
 }
