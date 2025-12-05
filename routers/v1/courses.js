@@ -51,6 +51,9 @@ router.get("/:href", authMiddlewares.havingToken,
     courseController.getOne
 )
 
-
+router.delete("/:id",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.remove)
 
 module.exports = router

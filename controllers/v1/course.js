@@ -143,6 +143,22 @@ const getOne = async (req, res) => {
     return res.json({ course, session, comment, countUserRegister, isUserRegisteredToThisCourse })
 }
 
+const remove = async (req, res) => {
+    const isVlidUserID = isValidObjectId(req.params.id)
+
+    if (!isVlidUserID) {
+        return res.status(409).json({ message: "User ID is not valid !!" })
+    }
+
+    const deleteCourse = await courseModel.findOneAndDelete({ _id: req.params.id })
+
+    if (deleteCourse) {
+        return res.json({ massage: "remove ok." })
+    }
+
+    return res.status(404).json({ massage: "The course was not found." })
+}
+
 
 module.exports = {
     addCourse,
@@ -152,5 +168,6 @@ module.exports = {
     removeSession,
     register,
     getCoursesByCategory,
-    getOne
+    getOne,
+    remove
 }
