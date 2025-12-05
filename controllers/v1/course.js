@@ -132,19 +132,15 @@ const getCoursesByCategory = async (req, res) => {
 }
 
 const getOne = async (req, res) => {
-    const course = await courseModel
-        .findOne({ href: req.params.href })
-        .populate("creator", "-password")
-        .populate("Category")
-
+    const course = await courseModel.findOne({ href: req.params.href }).populate("creator", "-password").populate("Category")
     const session = await sessionModel.find({ course: course._id }).lean()
-    const comment = await commentModel.find({course : course._id}).populate("creator", "-password").lean()
-    const countUserRegister = await courseUserModel.countDocuments({course: course._id})
-
+    const comment = await commentModel.find({ course: course._id }).populate("creator", "-password").lean()
+    const countUserRegister = await courseUserModel.countDocuments({ course: course._id })
+    const isUserRegisteredToThisCourse = !!(await courseUserModel.find({ user: req.user._id, course: course._id }))
 
     console.log(comment);
-    
-    return res.json({course, session, comment, countUserRegister})
+
+    return res.json({ course, session, comment, countUserRegister, isUserRegisteredToThisCourse })
 }
 
 
