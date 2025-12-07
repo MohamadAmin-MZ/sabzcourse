@@ -20,5 +20,23 @@ const createComment = async (req, res) => {
 
 }
 
+const remove = async (req, res) => {
+    const deletedComment = await commentModel.findOneAndDelete({
+        _id: req.params.id,
+    });
 
-module.exports = { createComment }
+    if (!deletedComment) {
+        return res.status(404).json({
+            message: "Comment not found !!",
+        });
+    }
+
+    return res.json(deletedComment);
+
+}
+
+
+module.exports = {
+    createComment,
+    remove
+}

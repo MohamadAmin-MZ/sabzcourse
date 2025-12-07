@@ -7,6 +7,8 @@ const isAdminMiddlewares = require("../../middlewares/isAdmin")
 const router = express.Router()
 
 router.post("/addComment",authMiddlewares.havingToken ,commentController.createComment)
+router.delete("/:id",authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.remove);
+
 
 
 module.exports= router
