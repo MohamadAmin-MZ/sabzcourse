@@ -10,7 +10,7 @@ router.post("/addComment",authMiddlewares.havingToken ,commentController.createC
 router.delete("/:id",authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.remove);
 router.put("/:id/accept", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.accept)
 router.put("/:id/reject", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.reject)
-
+router.post("/:id/answer",authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.answer)
 
 
 module.exports= router

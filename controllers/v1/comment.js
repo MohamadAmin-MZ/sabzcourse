@@ -1,3 +1,4 @@
+const { json } = require("body-parser")
 const commentModel = require("../../models/comment")
 const courseModel = require("../../models/course")
 
@@ -51,6 +52,7 @@ const accept = async (req, res) => {
 
     return res.json({ message: "Comment accepted successfully" });
 }
+
 const reject = async (req, res) => {
     const rejectedComment = await commentModel.findOneAndUpdate(
         {
@@ -68,10 +70,30 @@ const reject = async (req, res) => {
     return res.json({ message: "Comment rejected successfully" });
 }
 
+const answer = async (req, res) => {
+    const { body } = req.body
+    const acceptedComment = await commentModel.findOneAndUpdate({ _id: req.params.id }, { isAccept: 1 })
+
+    if (!acceptedComment) {
+        return res.status(404).json({ massage: "comment not found." })
+    }
+
+    const answerComment = await commentModel.create({
+        body,
+        course: acceptedComment.course,
+        creator: req.user._id,
+        isAnswer: 1,
+        isAccept: 1,
+        mainCommentID: req.params.id
+    })
+
+    return res.status(201).json(answerComment)
+}
 
 module.exports = {
     createComment,
     remove,
     accept,
-    reject
+    reject,
+    answer
 }
