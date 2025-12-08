@@ -8,6 +8,8 @@ const router = express.Router()
 
 router.post("/addComment",authMiddlewares.havingToken ,commentController.createComment)
 router.delete("/:id",authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.remove);
+router.put("/:id/accept", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.accept)
+router.put("/:id/reject", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.reject)
 
 
 
