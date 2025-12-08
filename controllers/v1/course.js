@@ -134,13 +134,28 @@ const getCoursesByCategory = async (req, res) => {
 const getOne = async (req, res) => {
     const course = await courseModel.findOne({ href: req.params.href }).populate("creator", "-password").populate("Category")
     const session = await sessionModel.find({ course: course._id }).lean()
-    const comment = await commentModel.find({ course: course._id }).populate("creator", "-password").lean()
+    const comments = await commentModel.find({ course: course._id }).populate("creator", "-password").populate("course").lean()
     const countUserRegister = await courseUserModel.countDocuments({ course: course._id })
     const isUserRegisteredToThisCourse = !!(await courseUserModel.find({ user: req.user._id, course: course._id }))
 
-    console.log(comment);
+    console.log(comments);
+    
+    let allComments = [];
 
-    return res.json({ course, session, comment, countUserRegister, isUserRegisteredToThisCourse })
+    comments.forEach((comment) => {
+        comments.forEach((answerComment) => {
+            if (String(comment._id) == String(answerComment.mainCommentID)) {
+                allComments.push({
+                    ...comment,
+                    course: comment.course.name,
+                    creator: comment.creator.name,
+                    answerComment,
+                });
+            }
+        });
+    });
+
+    return res.json({ course, session, comments: allComments, countUserRegister, isUserRegisteredToThisCourse })
 }
 
 const remove = async (req, res) => {
