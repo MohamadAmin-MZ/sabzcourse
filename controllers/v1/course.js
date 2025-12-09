@@ -139,7 +139,7 @@ const getOne = async (req, res) => {
     const isUserRegisteredToThisCourse = !!(await courseUserModel.find({ user: req.user._id, course: course._id }))
 
     console.log(comments);
-    
+
     let allComments = [];
 
     comments.forEach((comment) => {
@@ -194,7 +194,9 @@ const getRelated = async (req, res) => {
     return res.json(relatedCourses);
 };
 
-
+const popular = async (req, res) => {
+    
+}
 
 module.exports = {
     addCourse,
@@ -206,5 +208,6 @@ module.exports = {
     getCoursesByCategory,
     getOne,
     remove,
-    getRelated
+    getRelated,
+    popular
 }
