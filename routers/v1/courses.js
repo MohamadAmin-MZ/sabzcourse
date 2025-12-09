@@ -65,6 +65,10 @@ router.get("/popular",
     courseController.popular
 );
 
+router.get("/presell",
+    courseController.presell
+);
+
 
 
 module.exports = router

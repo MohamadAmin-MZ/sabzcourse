@@ -195,7 +195,11 @@ const getRelated = async (req, res) => {
 };
 
 const popular = async (req, res) => {
-    
+
+}
+
+const presell = async () => {
+
 }
 
 module.exports = {
@@ -209,5 +213,6 @@ module.exports = {
     getOne,
     remove,
     getRelated,
-    popular
+    popular,
+    presell
 }
