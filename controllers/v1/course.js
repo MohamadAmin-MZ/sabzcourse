@@ -198,9 +198,21 @@ const popular = async (req, res) => {
 
 }
 
-const presell = async () => {
+const presell = async (req, res) => {
+    try {
+        const presellCourses = await courseModel.find({ status: "پیش فروش" }).lean();
 
-}
+        if (presellCourses.length === 0) {
+            return res.status(404).json({ message: "No presell courses found." });
+        }
+
+        return res.status(200).json(presellCourses);
+    } catch (err) {
+        console.error("presell error:", err);
+        return res.status(500).json({ message: "internal server error" });
+    }
+};
+
 
 module.exports = {
     addCourse,

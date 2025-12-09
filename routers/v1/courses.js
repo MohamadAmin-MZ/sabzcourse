@@ -47,6 +47,10 @@ router.post("/:id/register",
     courseController.register
 )
 
+router.get("/presell",
+    courseController.presell
+);
+
 router.get("/:href", authMiddlewares.havingToken,
     courseController.getOne
 )
@@ -64,11 +68,6 @@ router.get("/related/:href",
 router.get("/popular",
     courseController.popular
 );
-
-router.get("/presell",
-    courseController.presell
-);
-
 
 
 module.exports = router
