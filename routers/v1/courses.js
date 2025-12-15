@@ -65,9 +65,9 @@ router.get("/related/:href",
     courseController.getRelated
 );
 
-// router.get("/popular",
-//     courseController.popular
-// );
+router.get("/popular",
+    courseController.popular
+);
 
 
 module.exports = router

@@ -196,37 +196,37 @@ const getRelated = async (req, res) => {
     return res.json(relatedCourses);
 };
 
-// const popular = async (req, res) => {
-//     const course = await courseUserModel.find({}, { course: 1 })
+const popular = async (req, res) => {
+    const course = await courseUserModel.find({}, { course: 1 })
 
-//     let counter = {}
-//     for (const item of course) {
-//         const id = item.course.toString();
-//         if (!counter[id]) counter[id] = 1;
-//         else counter[id]++;
-//     }
+    let counter = {}
+    for (const item of course) {
+        const id = item.course.toString();
+        if (!counter[id]) counter[id] = 1;
+        else counter[id]++;
+    }
 
-//     let list = Object.keys(counter).map(id => ({
-//         course: id,
-//         purchases: counter[id]
-//     }));
+    let list = Object.keys(counter).map(id => ({
+        course: id,
+        purchases: counter[id]
+    }));
 
-//     list.sort((a, b) => b.purchases - a.purchases);
+    list.sort((a, b) => b.purchases - a.purchases);
 
 
-//     const result = [];
-//     for (const item of list) {
-//         const course = await courseModel.findById(item.course);
+    const result = [];
+    for (const item of list) {
+        const course = await courseModel.findById(item.course);
 
-//         if (course) {
-//             result.push({
-//                 course,
-//                 purchases: item.purchases
-//             });
-//         }
-//     }
-//     return res.json(result)
-// }
+        if (course) {
+            result.push({
+                course,
+                purchases: item.purchases
+            });
+        }
+    }
+    return res.json(result)
+}
 
 const presell = async (req, res) => {
     try {
@@ -257,5 +257,5 @@ module.exports = {
     getRelated,
     popular,
     presell,
-    // popular
+    popular
 }
