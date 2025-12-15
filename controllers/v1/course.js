@@ -131,32 +131,34 @@ const getCoursesByCategory = async (req, res) => {
     }
 }
 
-const getOne = async (req, res) => {
-    const course = await courseModel.findOne({ href: req.params.href }).populate("creator", "-password").populate("Category")
-    const session = await sessionModel.find({ course: course._id }).lean()
-    const comments = await commentModel.find({ course: course._id }).populate("creator", "-password").populate("course").lean()
-    const countUserRegister = await courseUserModel.countDocuments({ course: course._id })
-    const isUserRegisteredToThisCourse = !!(await courseUserModel.find({ user: req.user._id, course: course._id }))
+// const getOne = async (req, res) => {
+//     const course = await courseModel.findOne({ href: req.params.href }).populate("creator", "-password").populate("Category")
+//     console.log(course);
 
-    console.log(comments);
+//     const session = await sessionModel.find({ course: course._id }).lean()
+//     const comments = await commentModel.find({ course: course._id }).populate("creator", "-password").populate("course").lean()
+//     const countUserRegister = await courseUserModel.countDocuments({ course: course._id })
+//     const isUserRegisteredToThisCourse = !!(await courseUserModel.find({ user: req.user._id, course: course._id }))
 
-    let allComments = [];
+//     console.log(comments);
 
-    comments.forEach((comment) => {
-        comments.forEach((answerComment) => {
-            if (String(comment._id) == String(answerComment.mainCommentID)) {
-                allComments.push({
-                    ...comment,
-                    course: comment.course.name,
-                    creator: comment.creator.name,
-                    answerComment,
-                });
-            }
-        });
-    });
+//     let allComments = [];
 
-    return res.json({ course, session, comments: allComments, countUserRegister, isUserRegisteredToThisCourse })
-}
+//     comments.forEach((comment) => {
+//         comments.forEach((answerComment) => {
+//             if (String(comment._id) == String(answerComment.mainCommentID)) {
+//                 allComments.push({
+//                     ...comment,
+//                     course: comment.course.name,
+//                     creator: comment.creator.name,
+//                     answerComment,
+//                 });
+//             }
+//         });
+//     });
+
+//     return res.json({ course, session, comments: allComments, countUserRegister, isUserRegisteredToThisCourse })
+// }
 
 const remove = async (req, res) => {
     const isVlidUserID = isValidObjectId(req.params.id)
@@ -194,9 +196,37 @@ const getRelated = async (req, res) => {
     return res.json(relatedCourses);
 };
 
-const popular = async (req, res) => {
+// const popular = async (req, res) => {
+//     const course = await courseUserModel.find({}, { course: 1 })
 
-}
+//     let counter = {}
+//     for (const item of course) {
+//         const id = item.course.toString();
+//         if (!counter[id]) counter[id] = 1;
+//         else counter[id]++;
+//     }
+
+//     let list = Object.keys(counter).map(id => ({
+//         course: id,
+//         purchases: counter[id]
+//     }));
+
+//     list.sort((a, b) => b.purchases - a.purchases);
+
+
+//     const result = [];
+//     for (const item of list) {
+//         const course = await courseModel.findById(item.course);
+
+//         if (course) {
+//             result.push({
+//                 course,
+//                 purchases: item.purchases
+//             });
+//         }
+//     }
+//     return res.json(result)
+// }
 
 const presell = async (req, res) => {
     try {
@@ -222,9 +252,10 @@ module.exports = {
     removeSession,
     register,
     getCoursesByCategory,
-    getOne,
+    // getOne,
     remove,
     getRelated,
     popular,
-    presell
+    presell,
+    // popular
 }

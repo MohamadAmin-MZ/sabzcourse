@@ -14,14 +14,14 @@ router.post(
     courseController.addCourse
 )
 
-router.post("/:id/create/session",
+router.post("/:id/createSession",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("video"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.createSession
 )
 
-router.get("/",
+router.get("/sessions",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.getAllSessions
@@ -51,9 +51,9 @@ router.get("/presell",
     courseController.presell
 );
 
-router.get("/:href", authMiddlewares.havingToken,
-    courseController.getOne
-)
+// router.get("/:href", authMiddlewares.havingToken,
+//     courseController.getOne
+// )
 
 router.delete("/:id",
     authMiddlewares.havingToken,
@@ -65,9 +65,9 @@ router.get("/related/:href",
     courseController.getRelated
 );
 
-router.get("/popular",
-    courseController.popular
-);
+// router.get("/popular",
+//     courseController.popular
+// );
 
 
 module.exports = router
