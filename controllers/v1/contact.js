@@ -20,9 +20,23 @@ const create = async (req, res) => {
     return res.status(201).json(contact);
 };
 
+const remove = async (req, res) => {
+    // Validate ...
+    const deletedContact = await contactModel.findOneAndRemove({
+        _id: req.params.id,
+    });
+
+    if (!deletedContact) {
+        return res.status(404).json({ message: "Contact not found !!" });
+    }
+
+    return res.json(deletedContact);
+};
+
 
 
 module.exports= {
     getAll,
-    create
+    create,
+    remove
 }
