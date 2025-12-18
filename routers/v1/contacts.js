@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.route("/").get(authMiddleware, isAdminMiddleware, contactsController.getAll)
 
+router.route("/").post(contactsController.create);
 
 
 module.exports = router;
