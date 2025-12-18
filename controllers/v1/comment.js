@@ -90,7 +90,7 @@ const answer = async (req, res) => {
     return res.status(201).json(answerComment)
 }
 
-const getCommentsByCourse = async (req, res) => {
+const getCommentsByCourse = async (req, res) => { 
 
     const comments = await commentModel.find({ course: req.params.id }).populate('creator', '-password').lean();
 
