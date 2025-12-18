@@ -33,10 +33,14 @@ const remove = async (req, res) => {
     return res.json(deletedContact);
 };
 
+const answer = async (req, res) => {
+    // Codes ...
+};
 
 
 module.exports= {
     getAll,
     create,
-    remove
+    remove,
+    answer
 }
