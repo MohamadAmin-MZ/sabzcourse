@@ -1,5 +1,5 @@
-const { model } = require("mongoose");
 const contactModel = require("./../../models/contact");
+const nodemailer = require("nodemailer")
 
 const getAll = async (req, res) => {
     const contacts = await contactModel.find({});
@@ -22,7 +22,7 @@ const create = async (req, res) => {
 
 const remove = async (req, res) => {
     // Validate ...
-    const deletedContact = await contactModel.findOneAndRemove({
+    const deletedContact = await contactModel.findOneAndDelete({
         _id: req.params.id,
     });
 
@@ -34,11 +34,38 @@ const remove = async (req, res) => {
 };
 
 const answer = async (req, res) => {
-    // Codes ...
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: "mohamadaminmohamadzadeh1@gmail.com",
+            pass: "tnnw jlmm gmxd aphf",
+        },
+    });
+
+    const mailOptions = {
+        from: "mohamadaminmohamadzadeh1@gmail.com",
+        to: req.body.email,
+        subject: "پاسخ پیغام شما از سمت آکادمی سبزلرن",
+        text: req.body.answer,
+    };
+
+    transporter.sendMail(mailOptions, async (error, info) => {
+        if (error) {
+            return res.json({ message: error });
+        } else {
+            const contact = await contactModel.findOneAndUpdate(
+                {
+                    email: req.body.email,
+                },
+                { answer: 1 }
+            );
+            return res.json({ message: "Email sent successfully :))" });
+        }
+    });
 };
 
 
-module.exports= {
+module.exports = {
     getAll,
     create,
     remove,
