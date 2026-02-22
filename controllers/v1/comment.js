@@ -1,4 +1,3 @@
-const { json } = require("body-parser")
 const commentModel = require("../../models/comment")
 const courseModel = require("../../models/course")
 

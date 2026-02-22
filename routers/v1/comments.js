@@ -6,11 +6,44 @@ const isAdminMiddlewares = require("../../middlewares/isAdmin")
 
 const router = express.Router()
 
-router.post("/addComment", authMiddlewares.havingToken, commentController.createComment)
-router.delete("/:id", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.remove);
-router.put("/:id/accept", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.accept)
-router.put("/:id/reject", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.reject)
-router.post("/:id/answer", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.answer)
-router.get("/:id/getAllComments", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, commentController.getCommentsByCourse)
+router.post(
+    "/addComment",
+    authMiddlewares.havingToken,
+    commentController.createComment
+)
+
+router.delete(
+    "/:id",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.remove
+)
+
+router.put(
+    "/:id/accept",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.accept
+)
+
+router.put(
+    "/:id/reject",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.reject
+)
+
+router.post(
+    "/:id/answer",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.answer
+)
+router.get(
+    "/:id/getAllComments",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.getCommentsByCourse
+)
 
 module.exports = router

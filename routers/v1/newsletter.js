@@ -5,8 +5,16 @@ const isAdminMiddleware = require("./../../middlewares/isAdmin");
 
 const router = express.Router()
 
-router.get("/", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, newsLettercontroller.getAll)
+router.get(
+    "/",
+    authMiddleware.havingToken,
+    isAdminMiddleware.adminAuthentication,
+    newsLettercontroller.getAll
+)
 
-router.post("/", newsLettercontroller.creat)
+router.post(
+    "/",
+    newsLettercontroller.creat
+)
 
 module.exports = router
