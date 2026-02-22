@@ -45,7 +45,7 @@ const answer = async (req, res) => {
     const mailOptions = {
         from: "mohamadaminmohamadzadeh1@gmail.com",
         to: req.body.email,
-        subject: "پاسخ پیغام شما از سمت آکادمی سبزلرن",
+        subject: "پاسخ پیغام شما از سمت آکادمی سبزکورس",
         text: req.body.answer,
     };
 
