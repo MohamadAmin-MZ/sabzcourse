@@ -12,13 +12,6 @@ router.post(
     categoriesController.create
 )
 
-router.delete(
-    "/remove/:id",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    categoriesController.remove
-)
-
 router.get(
     "/getAll",
     authMiddlewares.havingToken,
@@ -30,6 +23,13 @@ router.put(
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     categoriesController.updata
+)
+
+router.delete(
+    "/remove/:id",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    categoriesController.remove
 )
 
 module.exports = router;

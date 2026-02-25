@@ -14,17 +14,29 @@ router.post(
     courseController.addCourse
 )
 
+router.get("/sessions",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.getAllSessions
+)
+
+router.get("/presell",
+    courseController.presell
+);
+
+// router.get("/:href", authMiddlewares.havingToken,
+//     courseController.getOne
+// )
+
+router.get("/popular",
+    courseController.popular
+);
+
 router.post("/:id/createSession",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("video"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.createSession
-)
-
-router.get("/sessions",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    courseController.getAllSessions
 )
 
 router.get("/category/:href",
@@ -47,14 +59,6 @@ router.post("/:id/register",
     courseController.register
 )
 
-router.get("/presell",
-    courseController.presell
-);
-
-// router.get("/:href", authMiddlewares.havingToken,
-//     courseController.getOne
-// )
-
 router.delete("/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
@@ -63,10 +67,6 @@ router.delete("/:id",
 
 router.get("/related/:href",
     courseController.getRelated
-);
-
-router.get("/popular",
-    courseController.popular
 );
 
 

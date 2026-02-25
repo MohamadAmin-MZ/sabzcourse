@@ -12,6 +12,20 @@ router.post(
     commentController.createComment
 )
 
+router.post(
+    "/:id/answer",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.answer
+)
+
+router.get(
+    "/:id/getAllComments",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    commentController.getCommentsByCourse
+)
+
 router.delete(
     "/:id",
     authMiddlewares.havingToken,
@@ -31,19 +45,6 @@ router.put(
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     commentController.reject
-)
-
-router.post(
-    "/:id/answer",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    commentController.answer
-)
-router.get(
-    "/:id/getAllComments",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    commentController.getCommentsByCourse
 )
 
 module.exports = router

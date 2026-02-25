@@ -9,8 +9,8 @@ router.route("/").get(authMiddleware.havingToken, isAdminMiddleware.adminAuthent
 
 router.route("/").post(contactsController.create);
 
-router.route("/:id").delete(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.remove);
-
 router.route("/answer").post(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.answer);
+
+router.route("/:id").delete(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.remove);
 
 module.exports = router;
