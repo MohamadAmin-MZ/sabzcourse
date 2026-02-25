@@ -2,7 +2,7 @@ const offModel = require("../../models/off")
 const courseModel = require("../../models/course")
 
 const getAll = async (req, res) => {
-    const offers = await offModel.find({})
+    const offers = await offModel.find({}).populate("course", "name href").populate("creator", "name")
     return res.status(200).json(offers)
 }
 
@@ -30,14 +30,12 @@ const remove = async (req, res) => {
     return res.status(200).json({ message: "Removed successfully" })
 }
 
-
 const getOne = async (req, res) => { }
 
 const setAll = async (req, res) => {
     const { discount } = req.body
     const coursDiscount = await courseModel.updateMany({}, { $set: { discount } })
     return res.json({ massage: "setAll successfully." })
-
 }
 
 module.exports = {
