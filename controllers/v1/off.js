@@ -1,4 +1,5 @@
 const offModel = require("../../models/off")
+const courseModel = require("../../models/course")
 
 const getAll = async (req, res) => {
     const offers = await offModel.find({})
@@ -30,9 +31,14 @@ const remove = async (req, res) => {
 }
 
 
-const getOne = (req, res) => { }
+const getOne = async (req, res) => { }
 
-const setAll = (req, res) => { }
+const setAll = async (req, res) => {
+    const { discount } = req.body
+    const coursDiscount = await courseModel.updateMany({}, { $set: { discount } })
+    return res.json({ massage: "setAll successfully." })
+
+}
 
 module.exports = {
     getAll,
