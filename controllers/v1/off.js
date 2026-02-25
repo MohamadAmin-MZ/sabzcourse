@@ -1,8 +1,17 @@
 const offModel = require("../../models/off")
 
-const getAll = (req, res) => { }
+const getAll = async (req, res) => {
+    const offers = await offModel.find({})
+    return res.status(200).json(offers)
+}
 
-const create = (req, res) => { }
+const create = async (req, res) => {
+    const { code, percent, course, max } = req.body
+    console.log(req.body);
+    
+    const ok = await offModel.create({ code, percent, course, max, uses: 0, creator: req.user._id })
+    return res.status(201).json(ok)
+}
 
 const remove = (req, res) => { }
 

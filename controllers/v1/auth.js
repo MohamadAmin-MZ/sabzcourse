@@ -59,12 +59,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const { identifier, password } = req.body
-    console.log(req.body);
 
     const user = await userModel.findOne({
         $or: [{ username: identifier }, { email: identifier }]
     })
-    console.log(user);
 
     if (!user) {
         return res.status(401).json({ massage: "there is no user with this email or username" })
