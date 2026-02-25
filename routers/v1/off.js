@@ -8,7 +8,7 @@ router.get("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthenticat
 
 router.post("/create", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, offController.create)
 
-router.delete("/delete/:id", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, offController.remove)
+router.delete("/delete", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, offController.remove)
 
 router.post("/:code", authMiddlewares.havingToken, offController.getOne)
 

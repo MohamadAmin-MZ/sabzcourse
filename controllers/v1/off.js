@@ -7,13 +7,28 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
     const { code, percent, course, max } = req.body
-    console.log(req.body);
-    
+
     const ok = await offModel.create({ code, percent, course, max, uses: 0, creator: req.user._id })
     return res.status(201).json(ok)
 }
 
-const remove = (req, res) => { }
+
+const remove = async (req, res) => {
+    const { code, courseId } = req.body
+
+    if (!code && !courseId)
+        return res.status(400).json({ message: "code or courseId is required" })
+
+    const off = await offModel.findOneAndDelete(
+        code ? { code: code } : { course: courseId }
+    )
+
+    if (!off)
+        return res.status(404).json({ message: "Off not found" })
+
+    return res.status(200).json({ message: "Removed successfully" })
+}
+
 
 const getOne = (req, res) => { }
 
