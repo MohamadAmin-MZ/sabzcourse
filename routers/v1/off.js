@@ -12,6 +12,6 @@ router.delete("/delete", authMiddlewares.havingToken, isAdminMiddlewares.adminAu
 
 router.post("/campaign", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, offController.setAll)
 
-router.post("/:code", authMiddlewares.havingToken, offController.getOne)
+router.post("/", authMiddlewares.havingToken, offController.getOne)
 
 module.exports = router

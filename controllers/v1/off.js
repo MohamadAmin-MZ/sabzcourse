@@ -30,7 +30,18 @@ const remove = async (req, res) => {
     return res.status(200).json({ message: "Removed successfully" })
 }
 
-const getOne = async (req, res) => { }
+const getOne = async (req, res) => {
+    const { course, code } = req.body
+    const off = await offModel.findOne({ code, course })
+    if (!off) {
+        return res.status(404).json({ massage: "code is not valid." })
+    } else if (off.uses === off.max) {
+        return res.status(409).json({ massage: "code id alrealy used." })
+    } else {
+        await offModel.updateMany({ code, course }, { uses: off.uses + 1 })
+        return res.status(200).json(off)
+    }
+}
 
 const setAll = async (req, res) => {
     const { discount } = req.body
