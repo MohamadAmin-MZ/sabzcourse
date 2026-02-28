@@ -9,7 +9,7 @@ router.get("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthenticat
 router.post("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.create)
 router.delete("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.remove)
 router.get("/getOne", articleController.getOne)
-router.get("/draft", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.draft)
+router.post("/draft", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.draft)
 
 
 
