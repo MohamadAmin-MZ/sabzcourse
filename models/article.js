@@ -14,7 +14,7 @@ const articlesSchema = mongoose.Schema({
         required: true
     },
     category: {
-        type: mongoose.type.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Category"
     },
     creator: {
