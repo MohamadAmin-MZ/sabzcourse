@@ -74,7 +74,7 @@ const login = async (req, res) => {
         return res.status(401).json({ massage: "password is not valid." })
     }
 
-    const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "30 day" })
+    const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "3000000000 day" })
 
     return res.json({ accessToken })
 

@@ -13,6 +13,8 @@ const searchRouter = require("./routers/v1/search")
 const offRouter = require("./routers/v1/off")
 const articleRouter = require("./routers/v1/article")
 const orderRouter = require("./routers/v1/order")
+const ticketRouter = require("./routers/v1/ticket")
+const menuRouter = require("./routers/v1/menu")
 
 const app = express()
 
@@ -33,4 +35,6 @@ app.use("/v1/search", searchRouter)
 app.use("/v1/off", offRouter)
 app.use("/v1/article", articleRouter)
 app.use("/v1/order", orderRouter)
+app.use("/v1/ticket", ticketRouter)
+app.use("/v1/menu", menuRouter)
 module.exports = app;
