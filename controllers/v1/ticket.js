@@ -4,7 +4,7 @@ const ticketSubModel = require("../../models/ticket")
 
 const getAll = async (req, res) => {
     const ticket = await ticketSubModel.find({ answer: 0 }).populate("departmendId", "name").populate("departmendSubId", "name").populate("user", "name")
-    return res.status(201).json(ticket)
+    return res.status(200).json(ticket)
 }
 
 const answer = async (req, res) => {
@@ -55,7 +55,7 @@ const departmentSubs = async (req, res) => {
 
 const userTickets = async (req, res) => {
     const tickets = await ticketSubModel.find({ user: req.user._id }).sort({ _id: -1 }).populate("departmendId", "name").populate("departmendSubId", "name").populate("user", "name")
-    return res.status(201).json(tickets)
+    return res.status(200).json(tickets)
 }
 
 const getAnswer = async (req, res) => {
@@ -64,7 +64,7 @@ const getAnswer = async (req, res) => {
     const ticket = await ticketSubModel.findOne({ _id: ticketId })
     const ticketAnswer = await ticketSubModel.findOne({ parent: ticketId })
 
-    return res.status(201).json({ ticket, ticketAnswer })
+    return res.status(200).json({ ticket, ticketAnswer })
 }
 
 // const createDepartment = async (req, res) => {

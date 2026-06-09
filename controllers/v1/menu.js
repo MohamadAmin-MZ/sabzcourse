@@ -28,14 +28,14 @@ const create = async (req, res) => {
         parent
     })
 
-    return res.status(200).json(menu)
+    return res.status(201).json(menu)
 }
 
 const remove = async (req, res) => {
     const menuId = req.params.id
 
     const menuRmoved = await menuModel.deleteOne({ _id: menuId })
-    return res.json(menuRmoved)
+    return res.status(404).json(menuRmoved)
 }
 
 const update = async (req, res) => {
@@ -78,10 +78,7 @@ const update = async (req, res) => {
     }
 };
 
-
-const getAllInPanel = async (req, res) => {
-
-}
+const getAllInPanel = async (req, res) => { }
 
 module.exports = {
     getAll,

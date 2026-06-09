@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
 
 const getOne = async (req, res) => {
     const orderId = req.params.id
-    const order = await courseUsersModel.find({_id: orderId}).populate("course")
+    const order = await courseUsersModel.findOne({_id: orderId}).populate("course")
     return res.status(200).json(order)
 }
 

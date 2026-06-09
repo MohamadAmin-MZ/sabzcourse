@@ -14,7 +14,7 @@ router.get(
 
 router.post(
     "/",
-    newsLettercontroller.creat
+    newsLettercontroller.create
 )
 
 module.exports = router

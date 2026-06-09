@@ -71,7 +71,7 @@ const getSession = async (req, res) => {
     const isVlidUserID = isValidObjectId(req.params.sessionId)
 
     if (!isVlidUserID) {
-        return res.status(409).json({ message: "User ID is not valid !!" })
+        return res.status(400).json({ message: "User ID is not valid !!" })
     }
 
     const course = await courseModel.findOne({ href: req.params.href })
@@ -89,7 +89,7 @@ const removeSession = async (req, res) => {
     const deleteSession = await sessionModel.findOneAndDelete({ _id: req.params.id })
 
     if (!deleteSession) {
-        return res.status(404).json({ massage: "Session not found" })
+        return res.status(404).json({ message: "Session not found" })
     }
 
     return res.json(deleteSession)
@@ -104,7 +104,7 @@ const register = async (req, res) => {
     })
 
     if (isUserAlredyRegistered) {
-        return res.status(409).json({ massage: "user already register in this course." })
+        return res.status(409).json({ message: "user already register in this course." })
     }
 
     const register = await courseUserModel.create({
@@ -113,7 +113,7 @@ const register = async (req, res) => {
         price
     })
 
-    return res.status(201).json({ massage: "you are registered successfully." })
+    return res.status(201).json({ message: "you are registered successfully." })
 }
 
 const getCoursesByCategory = async (req, res) => {
@@ -127,7 +127,7 @@ const getCoursesByCategory = async (req, res) => {
 
         res.json(categoryCourses);
     } else {
-        res.josn([]);
+        res.json([]);
     }
 }
 
@@ -164,16 +164,16 @@ const remove = async (req, res) => {
     const isVlidUserID = isValidObjectId(req.params.id)
 
     if (!isVlidUserID) {
-        return res.status(409).json({ message: "User ID is not valid !!" })
+        return res.status(400).json({ message: "User ID is not valid !!" })
     }
 
     const deleteCourse = await courseModel.findOneAndDelete({ _id: req.params.id })
 
     if (deleteCourse) {
-        return res.json({ massage: "remove ok." })
+        return res.json({ message: "remove ok." })
     }
 
-    return res.status(404).json({ massage: "The course was not found." })
+    return res.status(404).json({ message: "The course was not found." })
 }
 
 const getRelated = async (req, res) => {
@@ -183,7 +183,7 @@ const getRelated = async (req, res) => {
 
     if (!course) {
         return res.status(404).json({
-            messgae: "Course not found !!",
+            message: "Course not found !!",
         });
     }
 

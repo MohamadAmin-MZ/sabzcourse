@@ -65,13 +65,13 @@ const login = async (req, res) => {
     })
 
     if (!user) {
-        return res.status(401).json({ massage: "there is no user with this email or username" })
+        return res.status(404).json({ message: "there is no user with this email or username" })
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password)
 
     if (!isPasswordValid) {
-        return res.status(401).json({ massage: "password is not valid." })
+        return res.status(401).json({ message: "password is not valid." })
     }
 
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "3000000000 day" })
@@ -80,11 +80,8 @@ const login = async (req, res) => {
 
 }
 
-const getMe = async () => { }
-
 module.exports = {
     register,
-    login,
-    getMe
+    login
 }
 

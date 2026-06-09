@@ -74,7 +74,7 @@ const answer = async (req, res) => {
     const acceptedComment = await commentModel.findOneAndUpdate({ _id: req.params.id }, { isAccept: 1 })
 
     if (!acceptedComment) {
-        return res.status(404).json({ massage: "comment not found." })
+        return res.status(404).json({ message: "comment not found." })
     }
 
     const answerComment = await commentModel.create({

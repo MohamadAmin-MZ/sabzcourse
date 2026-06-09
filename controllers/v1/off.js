@@ -34,9 +34,9 @@ const getOne = async (req, res) => {
     const { course, code } = req.body
     const off = await offModel.findOne({ code, course })
     if (!off) {
-        return res.status(404).json({ massage: "code is not valid." })
+        return res.status(404).json({ message: "code is not valid." })
     } else if (off.uses === off.max) {
-        return res.status(409).json({ massage: "code id alrealy used." })
+        return res.status(409).json({ message: "code id alrealy used." })
     } else {
         await offModel.updateMany({ code, course }, { uses: off.uses + 1 })
         return res.status(200).json(off)
@@ -46,7 +46,7 @@ const getOne = async (req, res) => {
 const setAll = async (req, res) => {
     const { discount } = req.body
     const coursDiscount = await courseModel.updateMany({}, { $set: { discount } })
-    return res.json({ massage: "setAll successfully." })
+    return res.json({ message: "setAll successfully." })
 }
 
 module.exports = {

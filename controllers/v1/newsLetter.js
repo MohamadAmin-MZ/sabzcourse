@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
     return res.json(emails)
 }
 
-const creat = async (req, res) => {
+const create = async (req, res) => {
     const { email } = req.body
     const newEmail = await newsLetterModel.create({ email })
     return res.json(newEmail)
@@ -14,5 +14,5 @@ const creat = async (req, res) => {
 
 module.exports = {
     getAll,
-    creat
+    create
 }

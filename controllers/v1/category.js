@@ -2,8 +2,6 @@ const categoriesModel = require("../../models/category")
 const mongoose = require("mongoose")
 
 
-
-
 const create = async (req, res) => {
 
     try {
@@ -29,7 +27,7 @@ const create = async (req, res) => {
 
         const newCategiry = await categoriesModel.create({ title, href })
 
-        return res.status(200).json(newCategiry)
+        return res.status(201).json(newCategiry)
     } catch (err) {
         console.error("Error in create category:", err);
         return res.status(500).json({ message: "Internal server error" });
@@ -69,7 +67,7 @@ const updata = async (req, res) => {
         const isValidID = mongoose.Types.ObjectId.isValid(req.params.id);
 
         if (!isValidID) {
-            return res.status(409).json({
+            return res.status(400).json({
                 message: "Category ID is not valid !!",
             });
         }
@@ -106,7 +104,7 @@ const remove = async (req, res) => {
   const isValidID = mongoose.Types.ObjectId.isValid(id);
 
   if (!isValidID) {
-    return res.status(409).json({
+    return res.status(400).json({
       message: "Category ID is not valid !!",
     });
   }
@@ -117,7 +115,6 @@ const remove = async (req, res) => {
 
   return res.json(deletedCategory);
 }
-
 
 
 module.exports = {

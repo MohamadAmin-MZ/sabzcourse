@@ -13,9 +13,4 @@ router.post(
     authController.login
 )
 
-router.get(
-    "/me",
-    authController.getMe
-)
-
 module.exports = router
