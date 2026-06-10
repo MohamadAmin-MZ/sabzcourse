@@ -5,12 +5,30 @@ const isAdminMiddleware = require("./../../middlewares/isAdmin");
 
 const router = express.Router();
 
-router.route("/").get(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.getAll)
+router.get(
+    "/",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    contactsController.getAll
+)
 
-router.route("/").post(contactsController.create);
+router.post(
+    "/",
+    contactsController.create
+)
 
-router.route("/answer").post(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.answer);
+router.post(
+    "/answer",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    contactsController.answer
+)
 
-router.route("/:id").delete(authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, contactsController.remove);
+router.delete(
+    "/:id",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    contactsController.remove
+)
 
 module.exports = router;

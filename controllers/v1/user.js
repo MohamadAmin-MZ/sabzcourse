@@ -41,7 +41,7 @@ const deletUser = async (req, res) => {
 }
 
 const changeRole = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params.id;
     const isValidUserID = isValidObjectId(id);
 
     if (!isValidUserID) {

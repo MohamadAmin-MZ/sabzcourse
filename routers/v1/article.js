@@ -7,13 +7,10 @@ const multerStorge = require("../../utils/uploader")
 
 const router = express.Router()
 
-router.post("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.create)
-router.get("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.getAll)
-router.delete("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.remove)
-router.get("/getOne", articleController.getOne)
-router.post("/draft", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.draft)
-
-
+router.post("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.create) // draft and published
+router.get("/", articleController.getAll)
+router.delete("/:id", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, articleController.remove)
+router.get("/:id", articleController.getOne)
 
 
 module.exports = router

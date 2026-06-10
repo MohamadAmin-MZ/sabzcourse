@@ -78,12 +78,9 @@ const update = async (req, res) => {
     }
 };
 
-const getAllInPanel = async (req, res) => { }
-
 module.exports = {
     getAll,
     create,
     remove,
-    update,
-    getAllInPanel
+    update
 }

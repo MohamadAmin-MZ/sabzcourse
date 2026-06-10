@@ -6,9 +6,8 @@ const isAdminMiddleware = require("./../../middlewares/isAdmin");
 const router = express.Router()
 
 router.get("/", menuController.getAll)
-router.post("/create", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.create)
-router.delete("/:id/remove", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.remove)
-router.post("/:id/update", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.update)
-router.post("/getAll", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.getAllInPanel)
+router.post("/", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.create)
+router.delete("/:id", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.remove)
+router.patch("/:id", authMiddleware.havingToken, isAdminMiddleware.adminAuthentication, menuController.update)
 
 module.exports = router

@@ -89,22 +89,7 @@ const answer = async (req, res) => {
     return res.status(201).json(answerComment)
 }
 
-const getCommentsByCourse = async (req, res) => { 
 
-    const comments = await commentModel.find({ course: req.params.id }).populate('creator', '-password').lean();
-
-    const mainComments = comments.filter(c => Number(c.isAnswer) === 0);
-    const answers = comments.filter(c => Number(c.isAnswer) === 1);
-
-
-    mainComments.forEach(main => {
-        main.replies = answers.filter(
-            ans => String(ans.mainCommentID) === String(main._id)
-        );
-    });
-
-    return res.json(mainComments);
-};
 
 
 module.exports = {
@@ -112,6 +97,5 @@ module.exports = {
     remove,
     accept,
     reject,
-    answer,
-    getCommentsByCourse
+    answer
 }

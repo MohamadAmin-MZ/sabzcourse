@@ -7,7 +7,7 @@ const isAdminMiddlewares = require("../../middlewares/isAdmin")
 const router = express.Router()
 
 router.post(
-    "/addComment",
+    "/",
     authMiddlewares.havingToken,
     commentController.createComment
 )
@@ -19,13 +19,6 @@ router.post(
     commentController.answer
 )
 
-router.get(
-    "/:id/getAllComments",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    commentController.getCommentsByCourse
-)
-
 router.delete(
     "/:id",
     authMiddlewares.havingToken,
@@ -33,18 +26,11 @@ router.delete(
     commentController.remove
 )
 
-router.put(
-    "/:id/accept",
+router.patch(
+    "/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     commentController.accept
-)
-
-router.put(
-    "/:id/reject",
-    authMiddlewares.havingToken,
-    isAdminMiddlewares.adminAuthentication,
-    commentController.reject
 )
 
 module.exports = router

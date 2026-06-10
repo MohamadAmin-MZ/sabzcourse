@@ -6,27 +6,27 @@ const categoriesController = require("../../controllers/v1/category");
 const router = express.Router()
 
 router.post(
-    "/create",
+    "/",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     categoriesController.create
 )
 
 router.get(
-    "/getAll",
+    "/",
     authMiddlewares.havingToken,
     categoriesController.getAll
 )
 
-router.put(
-    "/updata/:id",
+router.patch(
+    "/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     categoriesController.updata
 )
 
 router.delete(
-    "/remove/:id",
+    "/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     categoriesController.remove

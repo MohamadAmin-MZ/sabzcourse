@@ -15,13 +15,10 @@ const create = async (req, res) => {
 
 
 const remove = async (req, res) => {
-    const { code, courseId } = req.body
-
-    if (!code && !courseId)
-        return res.status(400).json({ message: "code or courseId is required" })
+    const { code } = req.params
 
     const off = await offModel.findOneAndDelete(
-        code ? { code: code } : { course: courseId }
+        { code: code }
     )
 
     if (!off)
@@ -31,7 +28,8 @@ const remove = async (req, res) => {
 }
 
 const getOne = async (req, res) => {
-    const { course, code } = req.body
+    const { course } = req.body
+    const code = req.params.id
     const off = await offModel.findOne({ code, course })
     if (!off) {
         return res.status(404).json({ message: "code is not valid." })

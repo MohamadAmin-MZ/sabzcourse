@@ -243,6 +243,23 @@ const presell = async (req, res) => {
     }
 };
 
+const getCommentsByCourse = async (req, res) => { 
+
+    const comments = await commentModel.find({ course: req.params.courseId }).populate('creator', '-password').lean();
+
+    const mainComments = comments.filter(c => Number(c.isAnswer) === 0);
+    const answers = comments.filter(c => Number(c.isAnswer) === 1);
+
+
+    mainComments.forEach(main => {
+        main.replies = answers.filter(
+            ans => String(ans.mainCommentID) === String(main._id)
+        );
+    });
+
+    return res.json(mainComments);
+};
+
 
 module.exports = {
     addCourse,
@@ -257,5 +274,6 @@ module.exports = {
     getRelated,
     popular,
     presell,
-    popular
+    popular,
+    getCommentsByCourse
 }

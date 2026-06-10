@@ -8,7 +8,8 @@ const getAll = async (req, res) => {
 }
 
 const answer = async (req, res) => {
-    const { body, ticketId } = req.body
+    const { body } = req.body
+    const ticketId = req.params.id
     const ticket = await ticketSubModel.findOne({ _id: ticketId })
     const answer = await ticketSubModel.create({
         departmendId: ticket.departmendId,

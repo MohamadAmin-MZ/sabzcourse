@@ -7,34 +7,34 @@ const router = express.Router();
 
 
 router.get(
-    "/getAll",
+    "/",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     userController.getAll
 )
 
-router.put(
-    "/role",
+router.patch(
+    "/:id/role",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     userController.changeRole
 )
 
-router.put(
-    "/editUser",
+router.patch(
+    "/",
     authMiddlewares.havingToken,
     userController.editUser
 )
 
 router.delete(
-    "/deleteUser/:id",
+    "/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     userController.deletUser
 )
 
 router.post(
-    "/ban/:id",
+    "/:id/ban",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     userController.banUser

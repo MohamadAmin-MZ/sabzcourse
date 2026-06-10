@@ -7,7 +7,7 @@ const multerStorage = require("./../../utils/uploader")
 const router = express.Router()
 
 router.post(
-    "/create",
+    "/",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("cover"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
@@ -20,11 +20,18 @@ router.get("/sessions",
     courseController.getAllSessions
 )
 
+router.get(
+    "/:courseId/comments",
+    authMiddlewares.havingToken,
+    isAdminMiddlewares.adminAuthentication,
+    courseController.getCommentsByCourse
+)
+
 router.get("/presell",
     courseController.presell
 );
 
-// router.get("/:href", authMiddlewares.havingToken,
+// router.get("/",
 //     courseController.getOne
 // )
 
@@ -32,29 +39,28 @@ router.get("/popular",
     courseController.popular
 );
 
-router.post("/:id/createSession",
+router.post("/:id/sessions",
     multer({ storage: multerStorage, limits: { fileSize: 100000000 } }).single("video"),
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.createSession
 )
 
-router.get("/category/:href",
-    authMiddlewares.havingToken,
+router.get("/:href",
     courseController.getCoursesByCategory
 );
 
-router.get("/:href/:sessionId",
+router.get("/:href/sessionId",
     courseController.getSession
 )
 
-router.delete("/session/:id",
+router.delete("/sessions/:id",
     authMiddlewares.havingToken,
     isAdminMiddlewares.adminAuthentication,
     courseController.removeSession
 )
 
-router.post("/:id/register",
+router.post("/:id/registrations",
     authMiddlewares.havingToken,
     courseController.register
 )
@@ -65,7 +71,7 @@ router.delete("/:id",
     courseController.remove
 )
 
-router.get("/related/:href",
+router.get("/:href/related",
     courseController.getRelated
 );
 

@@ -7,7 +7,7 @@ const router = exprees.Router()
 
 router.get("/", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, ticketController.getAll)
 
-router.post("/answer", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, ticketController.answer)
+router.post("/:id", authMiddlewares.havingToken, isAdminMiddlewares.adminAuthentication, ticketController.answer)
 
 router.post("/", authMiddlewares.havingToken, ticketController.create)
 
