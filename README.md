@@ -41,3 +41,17 @@ Here's what I worked on the most:
 - **dotenv** – For keeping secrets (database URIs, JWT keys, etc.) out of my code.
 
 I also wrote a couple of custom middlewares: one for authentication (checking if the user is logged in) and another for authorization (restricting access to admin-only routes). While not overly complex, they are effective in enforcing security policies.
+
+
+
+## 🧭 What's next? (because I'm not done yet)
+
+This project taught me a lot, but I know it's not perfect. Here's what I want to add when I come back to it:
+
+- **Validation** – Right now, I trust the client too much. I want to add proper checks with `express-validator` or `joi`.  
+- **Testing** – Because typing `console.log` and hoping for the best isn't a strategy.  
+- **Docker** – So anyone can run it with one command, without installing MongoDB locally.  
+- **Deployment** – Put it on Render or Railway and give it a real URL.  
+- **Better error handling** – No more ugly `res.status(500).json({message: "something went wrong"})` everywhere.
+
+ I'm actively learning these things. This project will get better — just like me.
