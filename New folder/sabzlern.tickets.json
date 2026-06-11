@@ -1,0 +1,81 @@
+[{
+  "_id": {
+    "$oid": "69ddc65754b2a2f668f13975"
+  },
+  "departmendId": {
+    "$oid": "69d2fb7cebf93f7f4ba26e23"
+  },
+  "departmendSubId": {
+    "$oid": "69d33b52846cfa9cc0c18976"
+  },
+  "prioriby": 3,
+  "title": "درخواست کد تخفیف",
+  "body": "لطفا اگر امکانش هست یه کد تخفیف به ما بدین ممنون میشم",
+  "user": {
+    "$oid": "69dc9ac2e30c4dad458ad83b"
+  },
+  "answer": 1,
+  "isAnswer": 0,
+  "createdAt": {
+    "$date": "2026-04-14T04:45:11.916Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-14T04:57:41.849Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ddc68f54b2a2f668f13978"
+  },
+  "departmendId": {
+    "$oid": "69d2fb93ebf93f7f4ba26e25"
+  },
+  "departmendSubId": {
+    "$oid": "69d33b8d846cfa9cc0c1897a"
+  },
+  "prioriby": 3,
+  "title": "باگ بزرگی دارید توی سایت",
+  "body": "لطفااا دوره تایپ اسکریبت رو رایگان کنیید😭",
+  "user": {
+    "$oid": "69dc9ac2e30c4dad458ad83b"
+  },
+  "answer": 0,
+  "isAnswer": 0,
+  "createdAt": {
+    "$date": "2026-04-14T04:46:07.644Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-14T04:46:07.644Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ddc9459037f7eb41c848e4"
+  },
+  "departmendId": {
+    "$oid": "69d2fb7cebf93f7f4ba26e23"
+  },
+  "departmendSubId": {
+    "$oid": "69d33b52846cfa9cc0c18976"
+  },
+  "prioriby": 3,
+  "parent": {
+    "$oid": "69ddc65754b2a2f668f13975"
+  },
+  "title": "جواب تیکت ارسالی",
+  "body": "براتون ازسال شد",
+  "user": {
+    "$oid": "69dc9ac2e30c4dad458ad83b"
+  },
+  "answer": 0,
+  "isAnswer": 1,
+  "createdAt": {
+    "$date": "2026-04-14T04:57:41.844Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-14T04:57:41.844Z"
+  },
+  "__v": 0
+}]

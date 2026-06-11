@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "69264047aa7102a1a25ef5d9"
+  },
+  "name": "node.js",
+  "description": "acdfdsvgbhnjmk,l.;.l,kgmjfnhgdbfvsd",
+  "cover": "17641145034465569.509286310641.png",
+  "support": "از تلگرام",
+  "href": "node-ex",
+  "price": 48000000,
+  "status": "اتمام شده",
+  "discount": 20,
+  "createdAt": {
+    "$date": "2025-11-25T23:48:23.466Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T21:34:37.833Z"
+  },
+  "__v": 0,
+  "creator": {
+    "$oid": "69211127bc1f24d98619961a"
+  },
+  "Category": {
+    "$oid": "6923c629970f11384f6ca3f8"
+  }
+},
+{
+  "_id": {
+    "$oid": "6926412daa7102a1a25ef5de"
+  },
+  "name": "js",
+  "description": "zfxgbchvj,kb.k,jmhtgrf",
+  "cover": "17641147337228753.669971601666.png",
+  "support": "پرسش و پاسخ",
+  "href": "js-ex",
+  "price": 23300000,
+  "status": "پیش فروش",
+  "discount": 20,
+  "creator": {
+    "$oid": "69211127bc1f24d98619961a"
+  },
+  "createdAt": {
+    "$date": "2025-11-25T23:52:13.727Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T21:34:37.833Z"
+  },
+  "__v": 0,
+  "Category": {
+    "$oid": "6923c656970f11384f6ca3fb"
+  }
+}]

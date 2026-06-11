@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "695ae3d75e7daccb89bd6513"
+  },
+  "email": "mohamad.king138400@gmail.com",
+  "createdAt": {
+    "$date": "2026-01-04T22:04:07.364Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-04T22:04:07.364Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "695ae4335e7daccb89bd6515"
+  },
+  "email": "mohamadaminmohamadzadeh@gmail.com",
+  "createdAt": {
+    "$date": "2026-01-04T22:05:39.791Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-04T22:05:39.791Z"
+  },
+  "__v": 0
+}]
