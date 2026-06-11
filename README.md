@@ -38,5 +38,6 @@ Here's what I worked on the most:
 - **JSON Web Token (JWT)** – Simple and stateless authentication.  
 - **bcrypt** – Hashing passwords before saving them. Because plain text is a no-go.  
 - **multer** – For handling file uploads (course images, article thumbnails, etc.).  
-- **dotenv** – For keeping secrets (database URIs, JWT keys, etc.) out of my code.  
-> I also wrote a couple of custom middlewares: one for authentication (checking if the user is logged in) and another for authorization (restricting access to admin-only routes). While not overly complex, they are effective in enforcing security policies.
+- **dotenv** – For keeping secrets (database URIs, JWT keys, etc.) out of my code.
+
+I also wrote a couple of custom middlewares: one for authentication (checking if the user is logged in) and another for authorization (restricting access to admin-only routes). While not overly complex, they are effective in enforcing security policies.
